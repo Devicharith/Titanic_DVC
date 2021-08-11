@@ -1,0 +1,4 @@
+prepare:
+  split: 0.20
+train:
+  alpha: 1
