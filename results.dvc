@@ -1,0 +1,5 @@
+outs:
+- md5: e5e42c9ca5fbb9d25479b473a440d959.dir
+  size: 4821
+  nfiles: 1
+  path: results
