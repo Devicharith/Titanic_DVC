@@ -2,6 +2,6 @@ prepare:
   split: 0.2
 train:
   alpha: 1
-  trees: 25
-  split: 2
-  depth: 4
+  trees: 50
+  split: 3
+  depth: 3
