@@ -16,7 +16,9 @@ stages:
     - prepared/out_train.csv
     - src/train.py
     params:
-    - train.alpha
+    - train.split
+    - train.depth
+    - train.trees
     outs:
     - model.pkl
   evaluate:

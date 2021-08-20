@@ -1,0 +1,14 @@
+import git
+
+REPO = git.Repo(".")
+MODELS_COMMITS = list(REPO.iter_commits(paths="dvc.lock"))
+
+import streamlit as st
+
+selected_commit = st.selectbox(
+    "Choose your commit",
+    [commit for commit in MODELS_COMMITS],
+    format_func=lambda commit: f"{commit.hexsha[:6]} - {commit.message} - {commit.committed_datetime}",
+)
+
+st.write("Selected Commit", selected_commit)

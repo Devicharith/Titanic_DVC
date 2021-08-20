@@ -17,35 +17,37 @@ stages:
         prepare.split: 0.2
     outs:
     - path: prepared
-      md5: 4664e25ff190ead47dc0e3f7b3aff262.dir
+      md5: 937c5907c6d6ecc257d66e2e95731149.dir
       size: 35651
       nfiles: 3
   train:
     cmd: python src/train.py prepared/out_train.csv model.pkl
     deps:
     - path: prepared/out_train.csv
-      md5: 39b87b55718f807a77f6a2e143763041
-      size: 19642
+      md5: d6f4ba305306afc21948fc27e851156a
+      size: 19646
     - path: src/train.py
-      md5: b79a090ea6550d3577434588255ffe45
-      size: 578
+      md5: 2dea307e7fe31af69f591581efe8c485
+      size: 790
     params:
       params.yaml:
-        train.alpha: 1
+        train.depth: 4
+        train.split: 2
+        train.trees: 50
     outs:
     - path: model.pkl
-      md5: fa8e745b6c60ca9a624c559aeea722ec
-      size: 924
+      md5: f28e2254c1a142ade4386021195693a6
+      size: 119914
   evaluate:
     cmd: python src/evaluate.py model.pkl prepared/out_validation.csv prepared/out_test.csv
     deps:
     - path: src/evaluate.py
-      md5: 441e60a8dbf0495969c2fe4db66bfb1c
-      size: 1265
+      md5: 3bbfa3ed06e90bf49aac63b0780b9769
+      size: 1218
     outs:
     - path: prc.json
-      md5: 11c4658d2782077f7c00815f8d85e6a0
-      size: 16097
+      md5: 45f76ef6094826e78f4ac29c98e7f4ec
+      size: 9615
     - path: scores.json
-      md5: df0b5599cd8ff397cb9d09009be0eea7
+      md5: b91897c5cad5d4291b9ea3b4d89b261a
       size: 27

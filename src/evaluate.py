@@ -15,17 +15,20 @@ valid_file_name=sys.argv[2]
 valid_data=pd.read_csv(valid_file_name)
 x=valid_data.drop(['PassengerId','Survived'],axis=1)
 labels=valid_data['Survived']
+
+
 test_file_name=sys.argv[3]
 valid_data=pd.read_csv(valid_file_name)
 test_data=pd.read_csv(test_file_name)
 test=test_data.drop('PassengerId',axis=1)
 id=test_data['PassengerId']
 
+
 predictions_by_class = model.predict_proba(x)
 predictions = predictions_by_class[:, 1]
 test_predictions=model.predict(test)
 
-precision, recall, thresholds = precision_recall_curve(labels, predictions)
+precision, recall, _ = precision_recall_curve(labels, predictions)
 
 auc = metrics.auc(recall, precision)
 
@@ -35,9 +38,8 @@ with open('scores.json', 'w') as fd:
 with open('prc.json', 'w') as fd:
     json.dump({'prc': [{
             'precision': p,
-            'recall': r,
-            'threshold': t
-        } for p, r, t in zip(precision, recall, thresholds)
+            'recall': r
+        } for p, r in zip(precision, recall)
     ]}, fd)
 
 output = pd.DataFrame({ 'PassengerId' : id, 'Survived': test_predictions })
